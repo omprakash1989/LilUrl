@@ -44,5 +44,15 @@ How to use
 ==========
 ```python
 
+from flask import Flask
+from lil_url import shorten_url, init_app
+
+app = Flask(__name__)
+init_app(app)
+
+
+response = shorten_url("https://google.co.in")
+if response.get("success"):
+    print("Url Slug: {} \n Absolute Url: {}".format(response.get('slug'), response.get('absolute_url')))
 
 ```

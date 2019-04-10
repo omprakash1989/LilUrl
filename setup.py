@@ -54,7 +54,7 @@ class PyTest(TestCommand):
 setup(
     name="LilUrl",
     include_package_data=True,
-    version='0.0.1',
+    version='0.0.2',
     description='',
     long_description=LONG_DESCRIPTION,
     classifiers=CLASSIFIERS,
