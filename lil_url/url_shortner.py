@@ -26,7 +26,8 @@ def shorten_url(url, url_slug=None, expiry=None):
         Returns respnse dict.
     """
 
-    response = {"success": False, "message": "", "code": "", "slug": "", "absolute_url": ""}
+    response = {"success": False, "message": "", "code": "", "slug": ""}
+
     if url_slug:
         if redis.exists(url_slug):
             response["message"] = "The slug already exists"
@@ -40,7 +41,6 @@ def shorten_url(url, url_slug=None, expiry=None):
 
     response["success"] = True
     response["slug"] = url_slug
-    response["absolute_url"] = "{}/{}".format(request.base_url, url_slug)
 
     return response
 
