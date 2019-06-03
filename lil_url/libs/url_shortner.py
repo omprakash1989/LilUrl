@@ -42,4 +42,5 @@ class UrlShortener(object):
 
         app.login_manager = self
         from lil_url.url_shortner import server_url
-        app.add_url_rule('/<regex("[a-zA-Z0-9_-]*"):slug>/', 'serve_short_url', server_url)
+        from lil_url import DEFAULT_PREFIX
+        app.add_url_rule('/{}/<regex("[a-zA-Z0-9_-]*"):slug>/'.format(DEFAULT_PREFIX), 'serve_short_url', server_url)

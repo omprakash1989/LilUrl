@@ -3,7 +3,7 @@ import string
 
 from flask import Blueprint, redirect, request
 
-from lil_url.helpers.redis_helper import redis
+from lil_url.helpers.redis_helper import get_redis
 
 
 def shorten_url(url, url_slug=None, expiry=None):
@@ -26,7 +26,14 @@ def shorten_url(url, url_slug=None, expiry=None):
         Returns respnse dict.
     """
 
-    response = {"success": False, "message": "", "code": "", "slug": ""}
+    response = {"success": False, "message": "", "code": "", "slug": "", "short_url": ''}
+    from flask import current_app
+
+    host, port = None, None
+    if current_app.config.get("CACHE_SERVER_ADDR", None):
+        host, port = current_app.config.get("CACHE_SERVER_ADDR", (None, None))
+
+    redis = get_redis(host, port)
 
     if url_slug:
         if redis.exists(url_slug):
@@ -58,6 +65,13 @@ def server_url(slug):
         Redirects to the real/long URL.
     """
 
+    host, port = None, None
+    from flask import current_app
+    if current_app.config.get("CACHE_SERVER_ADDR", None):
+        host, port = current_app.config.get("CACHE_SERVER_ADDR", (None, None))
+
+    redis = get_redis(host, port)
+
     if redis.exists(slug):
         return redirect(redis.get(slug))
     else:
@@ -79,6 +93,15 @@ def _generate_url_slug(size=10, chars=string.ascii_lowercase + string.digits):
     """
 
     slug = ''.join(random.choice(chars) for _ in range(size))
+    from flask import current_app
+
+    host, port = None, None
+    print()
+    if current_app.config.get("CACHE_SERVER_ADDR", None):
+        host, port = current_app.config.get("CACHE_SERVER_ADDR", (None, None))
+
+    redis = get_redis(host, port)
+
     if redis.exists(slug):
         try:
             return _generate_url_slug()

@@ -7,8 +7,8 @@ import sys
 
 here = os.path.abspath(os.path.dirname(__file__))
 LONG_DESCRIPTION = 'Url Shortener for flask.'
-with open('README.rst', 'r') as f:
-    LONG_DESCRIPTION = f.read()
+# with open('README.rst', 'r') as f:
+#     LONG_DESCRIPTION = f.read()
 CLASSIFIERS = filter(None, map(str.strip,
 """
 Development Status :: 2 - Pre-Alpha
@@ -54,7 +54,7 @@ class PyTest(TestCommand):
 setup(
     name="LilUrl",
     include_package_data=True,
-    version='0.0.3',
+    version='0.0.8',
     description='',
     long_description=LONG_DESCRIPTION,
     classifiers=CLASSIFIERS,
