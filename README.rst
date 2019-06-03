@@ -49,19 +49,19 @@ The project is licensed under the MIT License.
   
 How to use  
 ==========
- - Adding Redis Configuration in settings
- ```python
-    REDIS_HOST = '31.236.35.13'
-    REDIS_PORT = '6379'
-    BASE_URL = 'https://mybaseurl.com/v1/'
+- Adding Redis Configuration in settings
+```python
+REDIS_HOST = '31.236.35.13'
+REDIS_PORT = '6379'
+BASE_URL = 'https://mybaseurl.com/v1/'
 
-    from flask import Flask
-    from lil_url import shorten_url, init_app
+from flask import Flask
+from lil_url import shorten_url, init_app
 
-    app = Flask(__name__)
-    init_app(app)
+app = Flask(__name__)
+init_app(app)
 
-    response = shorten_url("https://google.co.in")
-    if response.get("success"):
-      print("Url Slug: {} \n Absolute Url: {}".format(response.get('slug'), response.get('absolute_url')))
+response = shorten_url("https://google.co.in")
+if response.get("success"):
+  print("Url Slug: {} \n Absolute Url: {}".format(response.get('slug'), response.get('absolute_url')))
 ```
