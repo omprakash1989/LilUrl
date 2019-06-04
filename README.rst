@@ -66,7 +66,7 @@ BASE_URL = 'https://mybaseurl.com/v1/'
 
 - Implement the short URL code to the application.
 
-```python
+```
 
 
 from lil_url import shorten_url
